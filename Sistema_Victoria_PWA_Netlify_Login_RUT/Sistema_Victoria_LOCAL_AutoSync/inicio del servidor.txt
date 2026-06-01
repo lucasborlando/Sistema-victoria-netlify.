@@ -1,2 +1,0 @@
-como recordatorio tengo que abrir la consola terminal del vs code (ctrl y + ` ) 
-y ejecutar el siguiente comando -> python3 app.py
