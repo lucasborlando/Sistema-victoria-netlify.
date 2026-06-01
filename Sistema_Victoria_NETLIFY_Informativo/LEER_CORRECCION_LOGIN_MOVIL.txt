@@ -1,0 +1,10 @@
+SISTEMA VICTORIA - CORRECCIÓN LOGIN Y CELULAR
+
+1. Esta versión es informativa para Netlify/PWA.
+2. El botón INGRESAR fue corregido para validar contra data/usuarios_web.json.
+3. Los usuarios entran con su RUT registrado y clave inicial 12345.
+4. Al ingresar con 12345, la app solicita cambiar la contraseña.
+5. En esta versión estática, la nueva contraseña queda guardada en el dispositivo del usuario.
+6. Para seguridad real con contraseña sincronizada entre celulares, se requiere backend/base de datos protegida.
+7. Para subir a GitHub, reemplaza la carpeta Sistema_Victoria_NETLIFY_Informativo anterior por esta.
+8. En Netlify usa Publish directory: Sistema_Victoria_NETLIFY_Informativo/.

@@ -1,0 +1,26 @@
+SISTEMA VICTORIA - NETLIFY INFORMATIVO CORREGIDO
+
+Cambios aplicados:
+1. Botón INGRESAR corregido con onclick directo y listener JavaScript.
+2. Login por RUT más flexible:
+   - 20046029-4
+   - 20.046.029-4
+   - 200460294
+3. Clave inicial permitida: 12345 para usuarios activos en data/usuarios_web.json.
+4. Cambio de contraseña desde la app web.
+5. Login y panel optimizados para celular.
+6. Tablas convertidas a tarjetas en pantallas pequeñas.
+
+IMPORTANTE:
+Para Netlify, el Publish directory debe apuntar a esta carpeta:
+Sistema_Victoria_NETLIFY_Informativo
+
+Si el repositorio publica desde esta carpeta como Base directory, usa:
+Publish directory: .
+
+Usuario de prueba incluido:
+RUT: 20.046.029-4
+Clave: 12345
+
+Después de subir a GitHub:
+Netlify -> Deploys -> Trigger deploy -> Clear cache and deploy site.
