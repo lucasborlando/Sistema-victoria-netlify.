@@ -1,0 +1,23 @@
+LOGIN WEB INFORMATIVO - SISTEMA VICTORIA
+
+La app web ahora tiene login por RUT y clave.
+Los usuarios externos NO necesitan cuenta GitHub ni Netlify.
+
+IMPORTANTE PARA QUE FUNCIONE EL CAMBIO DE CONTRASEÑA EN LA WEB:
+En Netlify debes crear variables de entorno:
+
+GITHUB_TOKEN = token personal de GitHub con permiso Contents: Read and Write sobre este repositorio
+GITHUB_REPO = lucasborlando/Sistema-victoria-netlify
+GITHUB_BRANCH = principal
+USERS_FILE_PATH = Sistema_Victoria_NETLIFY_Informativo/data/usuarios_web.json
+
+Luego hacer Trigger deploy.
+
+Uso:
+1. Creas usuarios en el PC base con clave 12345.
+2. Ejecutas la sincronización/exportación.
+3. El usuario abre la app web, entra con RUT y 12345.
+4. La app le obliga a cambiar la clave a una de mínimo 8 caracteres.
+
+Nota de seguridad:
+Esta versión protege el acceso de forma práctica mediante login, pero los archivos JSON de una web estática pueden quedar accesibles si alguien conoce la ruta directa. Para seguridad de nivel alto, los datos también deben moverse a funciones/API protegidas.

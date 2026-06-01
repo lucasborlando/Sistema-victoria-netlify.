@@ -1,0 +1,61 @@
+SISTEMA VICTORIA - PAQUETE NETLIFY INFORMATIVO + LOCAL AUTOSYNC
+
+Este paquete trae 2 carpetas:
+
+1) Sistema_Victoria_LOCAL_AutoSync
+   - Es tu sistema local Flask para seguir trabajando en VS Code.
+   - La interfaz y la lógica de uso se mantienen iguales.
+   - Solo se agregó exportar_netlify.py para generar los datos públicos.
+
+2) Sistema_Victoria_NETLIFY_Informativo
+   - Esta es la versión que debes subir/publicar en Netlify.
+   - Es solo lectura: inventario, historial y reportes.
+   - Optimizada para celulares.
+   - No permite entregar, recibir, excluir, agregar o eliminar ítems.
+
+PASOS PARA USARLO
+
+A) PRIMERA PUBLICACIÓN EN NETLIFY
+1. Crea un repositorio nuevo en GitHub, por ejemplo: sistema-victoria-netlify.
+2. Sube SOLO el contenido de la carpeta Sistema_Victoria_NETLIFY_Informativo a ese repositorio.
+3. En Netlify elige: Add new site > Import from Git.
+4. Conecta ese repositorio.
+5. Build command: déjalo vacío.
+6. Publish directory: .
+7. Publica el sitio.
+
+B) TRABAJAR EN TU PC
+1. Abre Sistema_Victoria_LOCAL_AutoSync en VS Code.
+2. Instala requerimientos si hace falta:
+   pip install -r requirements.txt
+3. Ejecuta:
+   python app.py
+4. Trabaja normalmente en tu sistema local.
+
+C) ACTUALIZACIÓN AUTOMÁTICA
+Para que Netlify se actualice solo, la carpeta Sistema_Victoria_NETLIFY_Informativo debe ser el repositorio Git conectado a Netlify.
+
+Cuando hagas movimientos en el sistema local:
+- Se actualizan los Excel locales.
+- Se exportan data/inventario.json y data/historial.json.
+- Si la carpeta informativa tiene Git configurado, el sistema intenta hacer commit y push automáticamente.
+- Netlify detecta el push y publica los cambios.
+
+D) SI NO SE ACTUALIZA SOLO
+Ejecuta manualmente:
+- En Mac: ./sincronizar_netlify_mac.sh
+- En Windows: sincronizar_netlify.bat
+
+IMPORTANTE
+Netlify no puede leer directamente tu computador. La actualización automática funciona mediante GitHub.
+Tu sistema local sigue siendo el principal y Netlify queda como vista informativa para celulares.
+
+
+CONFIGURACIÓN RECOMENDADA EN MAC
+1. Instala Git si no lo tienes.
+2. Clona el repositorio de Netlify dentro de la misma carpeta donde está Sistema_Victoria_LOCAL_AutoSync.
+3. La carpeta debe llamarse exactamente Sistema_Victoria_NETLIFY_Informativo.
+4. Ejecuta una vez: python3 exportar_netlify.py
+5. Luego abre python3 app.py y trabaja normal.
+
+Si usas otra ubicación para la carpeta de Netlify, configura la variable SV_PUBLIC_DIR con la ruta completa.

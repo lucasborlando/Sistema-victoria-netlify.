@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Victoria - Ingreso</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#0f172a">
+<link rel="apple-touch-icon" href="/static/icon-192.png">
+</head>
+<body class="login-body">
+  <main class="login-card">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" class="login-logo" alt="Logo">
+    <h1>SISTEMA VICTORIA</h1>
+    <p>Ingreso de usuarios</p>
+
+    {% if error %}
+      <div class="login-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      <label>RUT / Puesto</label>
+      <input name="identificador" placeholder="20046029-4 o CDTE PELOTÓN" required>
+
+      <label>Clave</label>
+      <input name="clave" type="password" placeholder="Clave" required>
+
+      <button type="submit">INGRESAR</button>
+    </form>
+</main>
+<script>
+if ('serviceWorker' in navigator) {
+ window.addEventListener('load', () => {
+   navigator.serviceWorker.register('/static/sw.js');
+ });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+/static/manifest.json
+  Content-Type: application/manifest+json
+  Cache-Control: no-cache
+/static/sw.js
+  Cache-Control: no-cache
+/data/*
+  Cache-Control: no-cache
+/downloads/*
+  Cache-Control: no-cache
+/static/img/*
+  Cache-Control: public, max-age=604800
+/static/css/*
+  Cache-Control: public, max-age=3600
+/static/js/*
+  Cache-Control: public, max-age=3600

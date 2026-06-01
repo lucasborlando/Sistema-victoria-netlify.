@@ -1,0 +1,22 @@
+SISTEMA VICTORIA v3 - CORREGIDO
+
+Credenciales iniciales de supervigilante:
+RUT: 20046029-4
+Clave: 12345
+
+También acepta el RUT con puntos:
+20.046.029-4
+
+Cambios incluidos:
+1. Supervigilante corregido como LUCAS BORLANDO REYES / CDTE PELOTÓN.
+2. Perfil supervigilante habilitado para administrar usuarios.
+3. Se agregó campo Cargo/Puesto al crear usuarios.
+4. Se corrigió la carga de usuario actual en JavaScript.
+5. Entrega de item permite seleccionar categoría de salida: CAT I o CAT II.
+6. Flask queda listo para acceso remoto con ngrok usando host 0.0.0.0 y debug=False.
+
+Para iniciar:
+python3 app.py
+
+En otra terminal, para ngrok:
+ngrok http 5000
