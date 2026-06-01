@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sistema Victoria</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Victoria">
+  <meta name="description" content="Sistema Victoria informativo, solo lectura, optimizado para celulares.">
+
+  <link rel="stylesheet" href="static/css/style.css">
+<link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#10180c">
+<link rel="apple-touch-icon" href="/static/icon-192.png">
+</head>
+<body>
+
+<section id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <img src="static/img/logo.png" alt="Logo Sistema Victoria">
+    <h1>Sistema Victoria</h1>
+    <p>Acceso versión informativa</p>
+    <label>RUT</label>
+    <input id="loginRut" type="text" autocomplete="username" placeholder="Ej: 20046029-4">
+    <label>Clave</label>
+    <input id="loginClave" type="password" autocomplete="current-password" placeholder="Clave registrada">
+    <button id="loginBtn" type="button">INGRESAR</button>
+    <small id="loginMsg"></small>
+    <div class="login-help">Ingresa con el RUT y clave creados en el PC base. Si tu clave es 12345, la app te pedirá cambiarla.</div>
+  </div>
+</section>
+
+<div id="appShell" hidden>
+<header class="topbar">
+  <div class="brand">
+    <img src="static/img/logo.png" alt="Logo" class="logo">
+    <div>
+      <h1>BRIGADA DE AVIACIÓN DE EJÉRCITO</h1>
+      <p>Sistema Victoria - Vestuario y Equipo</p>
+    </div>
+  </div>
+
+  <div class="user-box">
+    <span id="usuarioTop">VERSIÓN INFORMATIVA | NETLIFY</span>
+    <strong id="clock">00:00:00</strong>
+    <span class="netlify-badge">SOLO LECTURA</span>
+    <button id="changePassBtn" class="install-btn" type="button">CAMBIAR CLAVE</button>
+    <button id="logoutBtn" class="install-btn" type="button">SALIR</button>
+    <button id="installAppBtn" class="install-btn" type="button" hidden>INSTALAR APP</button>
+    <small id="appStatus" class="app-status">Modo app web</small>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h2>MENÚ PRINCIPAL</h2>
+    <button onclick="mostrarSeccion('inicio')">INICIO</button>
+    <button onclick="mostrarSeccion('inventario')">INVENTARIO</button>
+    <button onclick="mostrarSeccion('historial')">HISTORIAL</button>
+    <button onclick="mostrarSeccion('reportes')">REPORTES</button>
+
+    <div class="summary">
+      <h3>RESUMEN GENERAL</h3>
+      <p>CAT I NUEVO <strong id="resCat1">0</strong></p>
+      <p>CAT II USADO <strong id="resCat2">0</strong></p>
+      <p>PERSONAL PLANTA <strong id="resPlanta">0</strong></p>
+      <p>CAT III EXCLUIDOS <strong id="resCat3">0</strong></p>
+      <hr>
+      <p>TOTAL GENERAL <strong id="resTotal">0</strong></p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="inicio" class="seccion activa">
+      <div id="avisoInformativo" class="info-readonly" style="display:none;">Versión informativa para celular: acceso solo lectura desde Netlify. Los datos se actualizan cuando el PC local sincroniza con GitHub.</div>
+      <section class="hero">
+        <div class="slider">
+          <img src="static/img/fondo.jpg" alt="Fondo 1">
+          <img src="static/img/fondo2.jpg" alt="Fondo 2">
+          <img src="static/img/fondo-panel.jpg" alt="Fondo 3">
+        </div>
+      </section>
+
+      <section class="actions"><button onclick="mostrarSeccion('inventario')">VER INVENTARIO</button><button onclick="mostrarSeccion('historial')">VER HISTORIAL</button><button onclick="mostrarSeccion('reportes')">VER REPORTES</button></section>
+
+      <section class="panel">
+        <h2>PANEL DE CONTROL</h2>
+        <div class="cards">
+          <div><strong id="cardItems">0</strong><span>ITEMS REGISTRADOS</span></div>
+          <div><strong id="cardGeneral">0</strong><span>ALMACÉN GENERAL</span></div>
+          <div><strong id="cardPlanta">0</strong><span>PERSONAL PLANTA</span></div>
+          <div><strong id="cardExcluidos">0</strong><span>EXCLUIDOS</span></div>
+        </div>
+      </section>
+    </section>
+
+    <section id="inventario" class="seccion">
+      <section class="search">
+        <label>BUSCAR ITEM</label>
+        <input id="buscar" type="text" placeholder="Buscar por código SIGLE o nombre del item..." onkeyup="renderInventario()">
+      </section>
+      <section class="panel">
+        <h2>INVENTARIO GENERAL</h2>
+        <table id="tablaInventario">
+          <thead>
+            <tr>
+              <th>CÓDIGO SIGLE</th><th>ESPECIE / ITEM</th><th>CAT I</th><th>CAT II</th>
+              <th>PER. PLANTA</th><th>CAT III</th><th>TOTAL</th><th>VALOR UNIT.</th><th>VALOR TOTAL</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </section>
+
+
+
+
+
+
+
+    <section id="historial" class="seccion">
+      <section class="panel">
+        <h2>HISTORIAL DE MOVIMIENTOS</h2>
+        <a href="downloads/historial_movimientos.xlsx" class="download-btn">DESCARGAR HISTORIAL EXCEL</a>
+        <div class="historial-filtros">
+          <label>Filtrar mes</label><input type="month" id="filtroMes" onchange="renderHistorial()">
+          <label>Responsable / usuario</label><input id="filtroResponsable" onkeyup="renderHistorial()">
+        </div>
+        <table id="tablaHistorial">
+          <thead>
+            <tr>
+              <th>FECHA</th><th>USUARIO SISTEMA</th><th>PERFIL</th><th>MOVIMIENTO</th><th>CÓDIGO</th><th>ITEM</th>
+              <th>CANT.</th><th>DESDE</th><th>HACIA</th><th>RESPONSABLE</th><th>OAL</th><th>OBS.</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </section>
+
+    <section id="reportes" class="seccion"><section class="panel">
+      <h2>REPORTES</h2>
+      <p>Selecciona el almacén en el panel derecho y presiona imprimir.</p>
+      <a href="downloads/inventario.xlsx" class="download-btn">DESCARGAR INVENTARIO ACTUALIZADO</a>
+    </section></section>
+
+
+  </main>
+
+  <aside class="report">
+    <h2>RESPONSABILIDAD TOTAL</h2>
+    <div class="responsabilidad-box">
+      <p>SOY RESPONSABLE DE:</p>
+      <strong id="valorResponsable">$0</strong>
+      <small id="responsableDetalle">--</small>
+    </div>
+
+    <h2>REPORTE POR ALMACÉN</h2>
+    <label>Seleccione almacén:</label>
+    <select id="almacenReporte" onchange="actualizarReporte()">
+      <option value="general">ALMACÉN GENERAL</option>
+      <option value="planta">PERSONAL DE PLANTA</option>
+      <option value="excluidos">EXCLUIDOS</option>
+      <option value="todos">TODOS LOS ALMACENES</option>
+    </select>
+    <button onclick="window.print()" class="print-btn">IMPRIMIR</button>
+
+    <div class="paper" id="areaReporte">
+      <div class="paper-header">
+        <img src="static/img/logo.png" alt="Logo">
+        <div>
+          <h3>EJÉRCITO DE CHILE</h3>
+          <h4>SISTEMA VICTORIA</h4>
+          <p>REPORTE DE INVENTARIO</p>
+        </div>
+      </div>
+      <p class="paper-date">Fecha: <span id="fechaReporte"></span></p>
+      <h3 id="tituloReporte">ALMACÉN GENERAL</h3>
+      <table id="tablaReporte">
+        <thead><tr><th>CÓDIGO</th><th>ITEM</th><th>TOTAL</th><th>VALOR TOTAL</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="firma"><span>RESPONSABLE</span></div>
+    </div>
+  </aside>
+</div>
+</div>
+
+<section id="passwordModal" class="password-modal" hidden>
+  <div class="password-card">
+    <h2>Cambiar contraseña</h2>
+    <p id="passNotice">Por seguridad debes cambiar la clave por defecto.</p>
+    <label>Clave actual</label>
+    <input id="passActual" type="password" autocomplete="current-password">
+    <label>Nueva clave segura</label>
+    <input id="passNueva" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+    <label>Repetir nueva clave</label>
+    <input id="passNueva2" type="password" autocomplete="new-password">
+    <div class="password-actions">
+      <button id="savePassBtn" type="button">GUARDAR CLAVE</button>
+      <button id="cancelPassBtn" type="button">CANCELAR</button>
+    </div>
+    <small id="passMsg"></small>
+  </div>
+</section>
+
+<script>window.USUARIO_ACTUAL = {nombre:"VERSIÓN INFORMATIVA NETLIFY", perfil:"informativo", rut:"Solo lectura"};</script>
+<script src="static/js/netlify.js"></script>
+<script>
+let deferredInstallPrompt = null;
+const installBtn = document.getElementById('installAppBtn');
+const appStatus = document.getElementById('appStatus');
+
+function setAppStatus(text) { if (appStatus) appStatus.textContent = text; }
+function isStandalone() { return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  if (installBtn && !isStandalone()) installBtn.hidden = false;
+});
+
+if (installBtn) {
+  installBtn.addEventListener('click', async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installBtn.hidden = true;
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  if (installBtn) installBtn.hidden = true;
+  setAppStatus('App instalada');
+});
+
+window.addEventListener('online', () => setAppStatus('Conectado'));
+window.addEventListener('offline', () => setAppStatus('Sin conexión: mostrando datos guardados'));
+if (isStandalone()) setAppStatus('App instalada');
+else setAppStatus(navigator.onLine ? 'Modo app web' : 'Sin conexión');
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('/static/sw.js');
+      registration.addEventListener('updatefound', () => {
+        const worker = registration.installing;
+        if (!worker) return;
+        worker.addEventListener('statechange', () => {
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+            setAppStatus('Actualización lista. Cierra y abre la app.');
+          }
+        });
+      });
+    } catch (error) {
+      setAppStatus('Modo web');
+    }
+  });
+}
+</script>
+</body>
+</html>
