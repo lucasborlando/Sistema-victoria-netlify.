@@ -1,5 +1,20 @@
 [
   {
+    "fecha": "01-06-2026 22:28:26",
+    "usuario": "LUCAS BORLANDO REYES",
+    "rut": "20.046.029-4",
+    "perfil": "supervigilante",
+    "movimiento": "Entrega a personal de planta",
+    "codigo": "25001001000018",
+    "item": "BOTA COMBATE CENTRO SUR COYOTE",
+    "cantidad": 2,
+    "desde": "Almacén General CAT II Usado",
+    "hacia": "Personal de Planta",
+    "persona": "Baldur ",
+    "oal": null,
+    "observacion": "Prueba 11"
+  },
+  {
     "fecha": "01-06-2026 22:27:53",
     "usuario": "LUCAS BORLANDO REYES",
     "rut": "20.046.029-4",
