@@ -22,5 +22,13 @@
     "cargo": "DPTO 4TO",
     "perfil": "informativo",
     "activo": true
+  },
+  {
+    "id": "20023557-7",
+    "rut": "20.023.557-7",
+    "nombre": "CB2 A. SOTO S.",
+    "cargo": "INFORMATIVO",
+    "perfil": "informativo",
+    "activo": true
   }
 ]
